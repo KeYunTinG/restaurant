@@ -17,13 +17,16 @@
     </div>
 </div>
 
+<div class="container mt-5 text-center fs-2">
+    <a href="./restaurants/new">新增餐廳</a>
+</div>
 <!-- restaurant list -->
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-10 col-12 mx-auto">
             <div class="row row-cols-sm-3">
                 {{#each restaurants}}
-                <a href="/restaurants/{{this.id}}" class="text-secondary">
+                {{!-- <a href="/restaurants/{{this.id}}" class="text-secondary"> --}}
                     <div class="card mb-3">
                         <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
                         <div class="card-body p-3">
@@ -35,10 +38,17 @@
                                 {{this.rating}}
                                 <i class="fas fa-star fa-xs"></i>
                             </span>
-
+                        </div>
+                        <div class="card-crud mb-1 d-flex justify-content-evenly align-items-center">
+                            <a href="/restaurants/{{ this._id }}/edit">Edit</a>
+                            <a href="/restaurants/{{ this._id }}">Detail</a>
+                            <form action="/restaurants/{{ this._id }}/delete" method="POST" style="display: inline">
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
                         </div>
                     </div>
-                </a>
+                    {{!--
+                </a> --}}
                 {{/each}}
             </div>
         </div>
