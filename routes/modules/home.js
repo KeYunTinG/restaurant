@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router()
-
 const Restaurant = require('../../models/restaurant')
-
+const restaurantList = require('../../restaurant.json')
 // routes setting
 router.get('/', (req, res) => {
     Restaurant.find()
