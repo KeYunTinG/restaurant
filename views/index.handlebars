@@ -4,15 +4,25 @@
         <div class="search-bar-inner">
             <form action="/search">
                 <h4 class="mb-2">尋找餐廳：</h4>
-                <div class="input-group">
-                    <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類"
-                        aria-label="Restaurant Name..." value="" aria-describedby="search-button">
-                    <div class="input-group-append">
-                        <button class="btn btn-major" type="submit" id="search-button"><i
-                                class="fas fa-search"></i></button>
+                <form action="/search">
+                    <div class="d-flex flex-column flex-sm-row align-items-sm-center gap-2">
+                        <div class="input-group mb-2 mb-sm-0 mr-sm-2">
+                            <input type="text" name="keywords" class="form-control" placeholder="輸入餐廳、分類"
+                                aria-label="Restaurant Name..." aria-describedby="button-addon2" value="{{keywords}}" />
+                            <button class="btn btn-major" type="submit" id="search-button"><i
+                                    class="fas fa-search"></i></button>
+                        </div>
+
+                        <div class="input-group">
+                            <select class="form-select" id="sort" name="sort">
+                                <option>A > Z</option>
+                                <option>Z > A</option>
+                                <option>類別</option>
+                                <option>地區</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
         </div>
     </div>
 </div>
@@ -34,7 +44,7 @@
                             <div class="restaurant-category mb-1">
                                 <i class="fas fa-utensils pr-2"></i>{{this.category}}
                             </div>
-                            <span class="badge badge-pill badge-danger font-weight-normal">
+                            <span class="badge badge-pill bg-warning font-weight-normal">
                                 {{this.rating}}
                                 <i class="fas fa-star fa-xs"></i>
                             </span>
@@ -42,7 +52,8 @@
                         <div class="card-crud mb-1 d-flex justify-content-evenly align-items-center">
                             <a href="/restaurants/{{ this._id }}/edit">Edit</a>
                             <a href="/restaurants/{{ this._id }}">Detail</a>
-                            <form action="/restaurants/{{ this._id }}/delete" method="POST" style="display: inline">
+                            <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST"
+                                style="display: inline">
                                 <button type="submit" class="btn btn-outline-danger">Delete</button>
                             </form>
                         </div>
