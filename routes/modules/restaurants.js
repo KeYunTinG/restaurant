@@ -34,7 +34,7 @@ router.put('/:_id', (req, res) => {
     const id = req.params._id
     const editRestaurant = req.body
     return Restaurant.updateOne({ _id: id }, editRestaurant)
-        .then(() => res.redirect(`/${id}`))
+        .then(() => res.redirect(`/restaurants/${id}`))
         .catch(error => console.log(error))
 })
 

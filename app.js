@@ -6,6 +6,7 @@ const restaurantList = require('./restaurant.json')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const routes = require('./routes')
+const PORT = process.env.PORT || 3000
 require('./config/mongoose')
 
 
@@ -20,6 +21,6 @@ app.use(routes)
 
 
 // start and listen on the Express server
-app.listen(port, () => {
-  console.log(`Express is listening on localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`App is running on localhost:${PORT}`)
 })
