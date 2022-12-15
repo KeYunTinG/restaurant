@@ -7,6 +7,9 @@ const methodOverride = require('method-override')
 const usePassport = require('./config/passport')
 const routes = require('./routes')
 const flash = require('connect-flash')
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const app = express()
 const PORT = process.env.PORT || 3000
