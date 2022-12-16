@@ -56,4 +56,13 @@ ctrl + c
 - Express-Handlebars 4.0.2
 - Bootstrap 5.1.3
 - MongoDB
-- mongoose 6.0.5
+- mongoose 5.9.7
+- bcryptjs": 2.4.3
+- body-parser": 1.20.1
+- connect-flash": 0.1.1
+- express-session": 1.17.1
+- method-override": 3.0.0
+- passport": 0.4.1
+- passport-facebook": 3.0.0
+- passport-local": 1.0.0
+- dotenv": 8.2.0
