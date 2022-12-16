@@ -10,7 +10,8 @@ router.get('/new', (req, res) => {
 
 router.post('/new', (req, res) => {
     const userId = req.user._id
-    return Restaurant.create(...req.body, userId)
+    const _id = req.params._id
+    return Restaurant.create({ ...req.body, userId })
         .then(() => res.redirect('/'))
         .catch(error => console.log(error))
 })
@@ -36,8 +37,8 @@ router.get('/:_id/edit', (req, res) => {
 router.put('/:_id', (req, res) => {
     const userId = req.user._id
     const _id = req.params._id
-    const editRestaurant = req.body
-    return Restaurant.findOneAndUpdate({ _id: userId }, req.body)
+    const updatedRestaurant = req.body
+    return Restaurant.findOneAndUpdate({ userId }, updatedRestaurant, { new: true, useFindAndModify: false })
         .then(() => res.redirect(`/restaurants/${_id}`))
         .catch(error => console.log(error))
 })

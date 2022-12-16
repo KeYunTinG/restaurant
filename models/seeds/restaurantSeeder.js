@@ -1,23 +1,52 @@
+const bcrypt = require('bcryptjs')
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
 const mongoose = require('mongoose')
 const Restaurant = require('../restaurant')
-const restaurants = require('./restaurant.json').results
+const restaurantList = require('./restaurant.json').results
 const db = require('../../config/mongoose')
-
+const User = require('../user')
+const SEED_USER = [
+    {
+        name: 'user1',
+        email: 'user1@example.com',
+        password: '12345678',
+        index: [0, 1, 2]
+    },
+    {
+        name: 'user2',
+        email: 'user2@example.com',
+        password: '12345678',
+        index: [3, 4, 5]
+    }
+]
 
 db.once('open', () => {
-    console.log('mongodb connected!')
-    restaurants.forEach(function (restaurant) {
-        Restaurant.create({
-            name: restaurant.name,
-            name_en: restaurant.name_en,
-            category: restaurant.category,
-            image: restaurant.image,
-            location: restaurant.location,
-            phone: restaurant.phone,
-            google_map: restaurant.google_map,
-            rating: restaurant.rating,
-            description: restaurant.description
-        })
-    });
-    console.log('done')
-})
+    Promise.all(SEED_USER.map(user => {
+        const { name, email, password, index } = user
+        bcrypt
+            .genSalt(10)
+            .then(salt => bcrypt.hash(password, salt))
+            .then(hash => User.create({
+                name,
+                email,
+                password: hash
+            }))
+            .then(user => {
+                const userId = user._id
+                const restaurants = index.map(index => {
+                    const restaurant = ({ ...restaurantList[index], userId })
+                    return restaurant
+                })
+                return new Promise(() => {
+                    Restaurant.create(restaurants)
+                    console.log('Create Seed Data')
+                })
+            })
+            .then(() => {
+                console.log('done.')
+                process.exit()
+            })
+    }))
+});
