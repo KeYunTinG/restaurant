@@ -44,9 +44,9 @@ db.once('open', () => {
                     console.log('Create Seed Data')
                 })
             })
-            .then(() => {
-                console.log('done.')
-                process.exit()
-            })
     }))
+        .then(() => {
+            console.log('done.')
+            process.exit()
+        })
 });

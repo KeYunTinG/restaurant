@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
 router.get("/search", (req, res) => {
     if (!req.query.keywords) {
         res.redirect("/")
+        return
     }
 
     const keywords = req.query.keywords
